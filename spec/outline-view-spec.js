@@ -1,6 +1,6 @@
 "use babel"
 
-const { TextEditor } = require("atom")
+import { TextEditor, Dock } from "atom"
 import * as OutlinePackage from "../dist/main"
 import { statuses } from "../dist/main"
 
@@ -11,14 +11,36 @@ import outlineMock from "./outlineMock.json"
 // To run a specific `it` or `describe` block add an `f` to the front (e.g. `fit`
 // or `fdescribe`). Remove the `f` to unfocus the block.
 
-function createMockProvider() {
+export function createMockProvider() {
   return {
     getOutline: () => outlineMock,
   }
 }
 
+function getOutlineItem() {
+  const rightDock: Dock = atom.workspace.getRightDock()
+  let dockItems = rightDock.getPaneItems()
+  if (dockItems.length === 0) {
+    throw new Error("Outline is not added to the dock")
+  }
+  dockItems = rightDock.getPaneItems()
+  return dockItems.filter((item) => item.getTitle() === "Outline")[0]
+}
+
 describe("Outline view", () => {
   let workspaceElement
+  let editor
+  let outlineContent
+  let outlineView
+
+  async function createMockOutline() {
+    atom.config.set("outline.sortEntries", false)
+    editor = new TextEditor()
+    await OutlinePackage.getOutline(editor)
+    outlineContent = workspaceElement.querySelector(".outline-content")
+    outlineView = getOutlineItem()
+    return { editor, outlineContent, outlineView }
+  }
 
   beforeEach(async () => {
     workspaceElement = atom.views.getView(atom.workspace)
@@ -31,19 +53,11 @@ describe("Outline view", () => {
     await atom.packages.activatePackage("atom-ide-outline")
 
     expect(atom.packages.isPackageLoaded("atom-ide-outline")).toBeTruthy()
-
-    spyOn(OutlinePackage.outlineProviderRegistry, "getProviderForEditor").and.returnValue(createMockProvider())
   })
 
   describe("getOutline", () => {
-    let editor
-    let outlineContent
-
     beforeEach(async () => {
-      atom.config.set("outline.sortEntries", false)
-      editor = new TextEditor()
-      await OutlinePackage.getOutline(editor)
-      outlineContent = workspaceElement.querySelector(".outline-content")
+      await createMockOutline()
     })
 
     it("renders outline into HTML", () => {
@@ -78,6 +92,10 @@ describe("Outline view", () => {
   })
 
   describe("setStatus", () => {
+    beforeEach(async () => {
+      await createMockOutline()
+    })
+
     it("presents status message correctly", () => {
       const mockStatus = {
         title: "Error message",
@@ -85,7 +103,7 @@ describe("Outline view", () => {
       }
       statuses.mockStatus = mockStatus
 
-      OutlinePackage.setStatus("mockStatus")
+      outlineView.setStatus("mockStatus")
 
       const statusHolder = workspaceElement.querySelector(".outline-content .status")
       const title = statusHolder.querySelector("h1")
@@ -101,7 +119,7 @@ describe("Outline view", () => {
       }
       statuses.mockStatus = mockStatus
 
-      OutlinePackage.setStatus("mockStatus")
+      outlineView.setStatus("mockStatus")
 
       const statusHolder = workspaceElement.querySelector(".outline-content .status")
       const title = statusHolder.querySelector("h1")

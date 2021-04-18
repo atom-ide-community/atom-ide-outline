@@ -20,10 +20,10 @@
     "test.format": "prettier . --check",
     "lint": "eslint . --fix",
     "test.lint": "eslint .",
-    "test": "atom --test spec",
+    "test": "npm run clean && cross-env NODE_ENV=test rollup -c && atom --test spec",
     "clean": "shx rm -rf dist",
     "dev": "npm run clean && cross-env NODE_ENV=development rollup -c -w",
-    "build": "npm run clean && cross-env NODE_ENV=production rollup -c ",
+    "build": "npm run clean && cross-env NODE_ENV=production rollup -c",
     "build-commit": "build-commit -o dist",
     "bump": "ncu -u",
     "prepare": "npm run build"

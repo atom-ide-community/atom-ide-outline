@@ -6,7 +6,6 @@ import { notifyError, largeness as editorLargeness } from "atom-ide-base/commons
 import { isItemVisible } from "atom-ide-base/commons-ui"
 
 export { statuses } from "./statuses" // for spec
-import { statuses } from "./statuses"
 import debounce from "lodash/debounce"
 
 const subscriptions = new CompositeDisposable()
@@ -14,16 +13,18 @@ const subscriptions = new CompositeDisposable()
 let view: OutlineView | undefined
 export const outlineProviderRegistry = new ProviderRegistry<OutlineProvider>()
 
-// let busySignalProvider: BusySignalProvider | undefined // service might be consumed late
+// export let busySignalProvider: BusySignalProvider | undefined // service might be consumed late
 
 export function activate() {
   addCommands()
   addObservers()
   if (atom.config.get("atom-ide-outline.initialDisplay")) {
     // initially show outline pane
-    toggleOutlineView().catch((e) => {
+    try {
+      toggleOutlineView()
+    } catch (e) {
       notifyError(e)
-    })
+    }
   }
 }
 
@@ -98,7 +99,7 @@ async function editorChanged(editor?: TextEditor) {
 
     // clean up if the editor editor is closed
     editor.onDidDestroy(() => {
-      setStatus("noEditor")
+      view?.setStatus("noEditor")
     })
   )
 }
@@ -115,7 +116,7 @@ export function revealCursor() {
   }
 }
 
-export async function toggleOutlineView() {
+export function toggleOutlineView() {
   if (view === undefined) {
     view = new OutlineView() // create outline pane
   }
@@ -135,7 +136,7 @@ export async function toggleOutlineView() {
 
   // Trigger an editor change whenever an outline is toggeled.
   try {
-    await editorChanged(atom.workspace.getActiveTextEditor())
+    editorChanged(atom.workspace.getActiveTextEditor())
   } catch (e) {
     notifyError(e)
   }
@@ -149,33 +150,11 @@ function getOutlintIfVisible(editor = atom.workspace.getActiveTextEditor()) {
   return getOutline(editor)
 }
 
-export async function getOutline(editor = atom.workspace.getActiveTextEditor()) {
+export function getOutline(editor = atom.workspace.getActiveTextEditor()) {
   if (view === undefined) {
     view = new OutlineView() // create outline pane
   }
-  // editor
-  if (editor === undefined) {
-    return setStatus("noEditor")
-  }
-
-  // provider
-  const provider = outlineProviderRegistry.getProviderForEditor(editor)
-
-  if (!provider) {
-    return setStatus("noProvider")
-  }
-
-  // const busySignalID = `Outline: ${editor.getPath()}`
-  // busySignalProvider?.add(busySignalID)
-
-  const outline = await provider.getOutline(editor)
-  view.setOutline(outline?.outlineTrees ?? [], editor, Boolean(editorLargeness(editor as TextEditor)))
-
-  // busySignalProvider?.remove(busySignalID)
-}
-
-export function setStatus(id: "noEditor" | "noProvider") {
-  view?.presentStatus(statuses[id])
+  return view.setOutline(editor)
 }
 
 export { default as config } from "./config.json"

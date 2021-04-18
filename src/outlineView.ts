@@ -1,6 +1,20 @@
 import { TextEditor, Point } from "atom"
 import { OutlineTree } from "atom-ide-base"
 import { isItemVisible, scrollIntoViewIfNeeded } from "atom-ide-base/commons-ui"
+import { statuses } from "./statuses"
+import { outlineProviderRegistry } from "./main"
+import { largeness as editorLargeness } from "atom-ide-base/commons-atom"
+
+// exported for spec
+export function getProviderForEditor(editor: TextEditor) {
+  if (process.env.NODE_ENV !== "test") {
+    return outlineProviderRegistry.getProviderForEditor(editor)
+  } else {
+    // create a mock outline
+    // eslint-disable-next-line
+    return require("../spec/outline-view-spec").createMockProvider()
+  }
+}
 
 export class OutlineView {
   public element: HTMLDivElement
@@ -17,7 +31,10 @@ export class OutlineView {
   /** cache of last rendered list used to avoid rerendering */
   lastEntries: OutlineTree[] | undefined
 
-  constructor() {
+  private setOutlineTimeout: NodeJS.Timeout | undefined
+  private isRendering: boolean = false
+
+  public constructor() {
     this.element = document.createElement("div")
     this.element.classList.add("atom-ide-outline")
 
@@ -29,23 +46,63 @@ export class OutlineView {
     this.outlineContent.classList.add("outline-content")
   }
 
-  destroy() {
+  public destroy() {
     this.element.remove()
   }
 
-  getElement() {
+  public getElement() {
     return this.element
   }
 
-  getTitle() {
+  public getTitle() {
     return "Outline"
   }
 
-  getIconName() {
+  public getIconName() {
     return "list-unordered"
   }
 
-  setOutline(outlineTree: OutlineTree[], editor: TextEditor, isLarge: boolean) {
+  public setOutline(editor: TextEditor | undefined) {
+    return new Promise<void>((resolve) => {
+      if (this.isRendering) {
+        // return if setOutline is already called and not finished yet.
+        resolve()
+        return
+      }
+      this.isRendering = true
+      // const busySignalID = `Outline: ${editor.getPath()}`
+      // busySignalProvider?.add(busySignalID)
+
+      // editor
+      if (editor === undefined) {
+        this.setStatus("noEditor")
+        resolve()
+        return
+      }
+
+      // provider
+      const provider = getProviderForEditor(editor)
+
+      if (!provider) {
+        this.setStatus("noProvider")
+        resolve()
+        return
+      }
+
+      if (this.setOutlineTimeout) {
+        clearTimeout(this.setOutlineTimeout)
+      }
+      this.setOutlineTimeout = setTimeout(async () => {
+        const outline = await provider.getOutline(editor)
+        this._setOutline(outline?.outlineTrees ?? [], editor, Boolean(editorLargeness(editor as TextEditor)))
+        // busySignalProvider?.remove(busySignalID)
+        this.isRendering = false
+        resolve()
+      }, 50) // 50ms internal debounce to prevent multiple calls
+    })
+  }
+
+  private _setOutline(outlineTree: OutlineTree[], editor: TextEditor, isLarge: boolean) {
     // skip rendering if it is the same
     // TIME 0.2-1.2ms // the check itself takes ~0.2-0.5ms, so it is better than rerendering
     if (this.lastEntries !== undefined && hasEqualContent(outlineTree, this.lastEntries)) {
@@ -72,7 +129,7 @@ export class OutlineView {
     this.outlineContent.appendChild(this.outlineList)
   }
 
-  clearContent() {
+  private clearContent() {
     this.outlineContent.innerHTML = ""
     if (this.outlineList !== undefined) {
       this.outlineList.dataset.editorRootScope = ""
@@ -80,7 +137,12 @@ export class OutlineView {
     this.lastEntries = undefined
   }
 
-  presentStatus(status: { title: string; description: string }) {
+  public setStatus(id: "noEditor" | "noProvider") {
+    this.presentStatus(statuses[id])
+    this.isRendering = false
+  }
+
+  private presentStatus(status: { title: string; description: string }) {
     this.clearContent()
 
     const statusElement = status && generateStatusElement(status)
@@ -91,7 +153,7 @@ export class OutlineView {
   }
 
   // callback for scrolling and highlighting the element that the cursor is on
-  selectAtCursorLine(editor: TextEditor) {
+  public selectAtCursorLine(editor: TextEditor) {
     const cursor = editor.getLastCursor()
 
     // no cursor
