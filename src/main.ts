@@ -1,4 +1,5 @@
 import { CompositeDisposable, TextEditor } from "atom"
+import type { Disposable } from "atom"
 import { OutlineView } from "./outlineView"
 import type { OutlineProvider } from "atom-ide-base"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
@@ -51,8 +52,9 @@ export function deactivate() {
 //   subscriptions.add(busySignalProvider)
 // }
 
-export async function consumeOutlineProvider(provider: OutlineProvider) {
-  subscriptions.add(/*  providerRegistryEntry */ outlineProviderRegistry.addProvider(provider))
+export function consumeOutlineProvider(provider: OutlineProvider): Disposable {
+  const prividerDisposable = outlineProviderRegistry.addProvider(provider)
+  subscriptions.add(/*  providerRegistryEntry */ prividerDisposable)
 
   // NOTE Generate (try) an outline after obtaining a provider for the current active editor
   // this initial outline is always rendered no matter if it is visible or not,
@@ -60,7 +62,8 @@ export async function consumeOutlineProvider(provider: OutlineProvider) {
   // or if the editor changes later once outline is visible
   // so we need to have an outline for the current editor
   // the following updates rely on the visibility
-  await getOutline()
+  getOutline()
+  return prividerDisposable
 }
 
 // disposables returned inside onEditorChangedDisposable
