@@ -2,11 +2,11 @@ lockfileVersion: 5.3
 
 specifiers:
   '@types/atom': latest
-  '@types/jasmine': ^3.7.7
-  '@types/lodash': ^4.14.170
-  '@types/node': ^15.12.4
+  '@types/jasmine': ^3.8.1
+  '@types/lodash': ^4.14.171
+  '@types/node': ^16.3.1
   atom-ide-base: ^3.1.1
-  atom-jasmine3-test-runner: ^5.2.6
+  atom-jasmine3-test-runner: ^5.2.7
   build-commit: latest
   cross-env: latest
   eslint-config-atomic: ^1.16.1
@@ -15,7 +15,7 @@ specifiers:
   prettier-config-atomic: ^2.0.5
   rollup-plugin-atomic: ^2.3.2
   shx: latest
-  typescript: ^4.3.4
+  typescript: ^4.3.5
   zadeh: ^3.0.0-beta.4
 
 dependencies:
@@ -25,18 +25,18 @@ dependencies:
   zadeh: 3.0.0-beta.4
 
 devDependencies:
-  '@types/atom': 1.40.10
-  '@types/jasmine': 3.7.7
-  '@types/lodash': 4.14.170
-  '@types/node': 15.12.4
-  atom-jasmine3-test-runner: 5.2.6
+  '@types/atom': 1.40.11
+  '@types/jasmine': 3.8.1
+  '@types/lodash': 4.14.171
+  '@types/node': 16.3.1
+  atom-jasmine3-test-runner: 5.2.7
   build-commit: 0.1.4
   cross-env: 7.0.3
   eslint-config-atomic: 1.16.1
   prettier-config-atomic: 2.0.5
-  rollup-plugin-atomic: 2.3.2_@types+node@15.12.4
+  rollup-plugin-atomic: 2.3.2_@types+node@16.3.1
   shx: 0.3.3
-  typescript: 4.3.4
+  typescript: 4.3.5
 
 packages:
 
@@ -427,6 +427,13 @@ packages:
     resolution: {integrity: sha512-aNFUhCuR6nmTTMoYKfWWMifZ3IcNETLWC75hCdg3i1/OvirfR/5qm1wfiISBb4s/TPM2YVEtxytCdWhKJuEhzw==}
     dependencies:
       '@types/node': 15.12.4
+    dev: false
+
+  /@types/atom/1.40.11:
+    resolution: {integrity: sha512-TsPltugw2wKtR5p6ICv73t9kxdx59fTfdcD8Xe/0EEjF5vHBz99Z7Kj/rPRpyM/4ZcY1GrkQh8hgOw/OJRCs0g==}
+    dependencies:
+      '@types/node': 16.3.1
+    dev: true
 
   /@types/dompurify/2.2.2:
     resolution: {integrity: sha512-8nNWfAa8/oZjH3OLY5Wsxu9ueo0NwVUotIi353g0P2+N5BuTLJyAVOnF4xBUY0NyFUGJHY05o1pO2bqLto+lmA==}
@@ -442,8 +449,8 @@ packages:
     resolution: {integrity: sha512-jnqIUKDUqJbDIUxm0Uj7bnlMnRm1T/eZ9N+AVMqhPgzrba2GhGG5o/jCTwmdPK709nEZsGoMzXEDUjcXHa3W0g==}
     dev: true
 
-  /@types/jasmine/3.7.7:
-    resolution: {integrity: sha512-yZzGe1d1T0y+imXDZ79F030nn8qbmiwpWKCZKvKN0KbTzwXAVYShUxkIxu1ba+vhIdabTGVGCfbtZC0oOam8TQ==}
+  /@types/jasmine/3.8.1:
+    resolution: {integrity: sha512-ioRNoJvv0eXL1c9BZKpnywZWb5YflhaSiF3IOp9deyoh30MOwkB3bNuzi4UW76EFEhcmqpoEpdWhcUAAilomTw==}
     dev: true
 
   /@types/json-schema/7.0.7:
@@ -454,8 +461,8 @@ packages:
     resolution: {integrity: sha1-7ihweulOEdK4J7y+UnC86n8+ce4=}
     dev: true
 
-  /@types/lodash/4.14.170:
-    resolution: {integrity: sha512-bpcvu/MKHHeYX+qeEN8GE7DIravODWdACVA1ctevD8CN24RhPZIKMn9ntfAsrvLfSX3cR5RrBKAbYm9bGs0A+Q==}
+  /@types/lodash/4.14.171:
+    resolution: {integrity: sha512-7eQ2xYLLI/LsicL2nejW9Wyko3lcpN6O/z0ZLHrEQsg280zIdCv1t/0m6UtBjUHokCGBQ3gYTbHzDkZ1xOBwwg==}
     dev: true
 
   /@types/mdast/3.0.3:
@@ -466,6 +473,10 @@ packages:
 
   /@types/node/15.12.4:
     resolution: {integrity: sha512-zrNj1+yqYF4WskCMOHwN+w9iuD12+dGm0rQ35HLl9/Ouuq52cEtd0CH9qMgrdNmi5ejC1/V7vKEXYubB+65DkA==}
+
+  /@types/node/16.3.1:
+    resolution: {integrity: sha512-N87VuQi7HEeRJkhzovao/JviiqKjDKMVKxKMfUvSKw+MbkbW8R0nA3fi/MQhhlxV2fQ+2ReM+/Nt4efdrJx3zA==}
+    dev: true
 
   /@types/prop-types/15.7.3:
     resolution: {integrity: sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==}
@@ -784,28 +795,28 @@ packages:
       marked: 1.2.9
     dev: false
 
-  /atom-jasmine3-test-runner/5.2.6:
-    resolution: {integrity: sha512-4JQ55hOmUMyMmxkevtBVnVPH3jMm2Z7X9UoQOPYo58+0o6//47B/7ELno6ldq/09YnbB0iKA18/zMDDzNUgzzg==}
+  /atom-jasmine3-test-runner/5.2.7:
+    resolution: {integrity: sha512-Aa6g79cFcRsxRN2ar7J9ya45Y2Yi6qC8PDLE1eOooOSJEWAA52vJ70vNmdJPSk+obFaZf5Ls7M9XTCn7kHU4UQ==}
     dependencies:
       etch: 0.14.1
       find-parent-dir: 0.3.1
       fs-plus: 3.1.1
       glob: 7.1.7
       grim: 2.0.3
-      jasmine: 3.7.0
-      jasmine-local-storage: 1.1.1_jasmine@3.7.0
-      jasmine-pass: 1.1.0_jasmine@3.7.0
-      jasmine-should-fail: 1.1.7_jasmine@3.7.0
-      jasmine-unspy: 1.1.1_jasmine@3.7.0
-      jasmine2-atom-matchers: 1.1.9_jasmine@3.7.0
-      jasmine2-focused: 1.1.1_jasmine@3.7.0
-      jasmine2-json: 1.1.1_jasmine@3.7.0
-      jasmine2-tagged: 1.1.1_jasmine@3.7.0
+      jasmine: 3.8.0
+      jasmine-local-storage: 1.1.1_jasmine@3.8.0
+      jasmine-pass: 1.1.0_jasmine@3.8.0
+      jasmine-should-fail: 1.1.7_jasmine@3.8.0
+      jasmine-unspy: 1.1.1_jasmine@3.8.0
+      jasmine2-atom-matchers: 1.1.9_jasmine@3.8.0
+      jasmine2-focused: 1.1.1_jasmine@3.8.0
+      jasmine2-json: 1.1.1_jasmine@3.8.0
+      jasmine2-tagged: 1.1.1_jasmine@3.8.0
       temp: 0.9.4
       underscore-plus: 1.7.0
     optionalDependencies:
-      '@types/atom': 1.40.10
-      '@types/jasmine': 3.7.7
+      '@types/atom': 1.40.11
+      '@types/jasmine': 3.8.1
     dev: true
 
   /atom-package-deps/7.2.3:
@@ -2264,82 +2275,82 @@ packages:
     resolution: {integrity: sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=}
     dev: true
 
-  /jasmine-core/3.7.1:
-    resolution: {integrity: sha512-DH3oYDS/AUvvr22+xUBW62m1Xoy7tUlY1tsxKEJvl5JeJ7q8zd1K5bUwiOxdH+erj6l2vAMM3hV25Xs9/WrmuQ==}
+  /jasmine-core/3.8.0:
+    resolution: {integrity: sha512-zl0nZWDrmbCiKns0NcjkFGYkVTGCPUgoHypTaj+G2AzaWus7QGoXARSlYsSle2VRpSdfJmM+hzmFKzQNhF2kHg==}
     dev: true
 
-  /jasmine-local-storage/1.1.1_jasmine@3.7.0:
+  /jasmine-local-storage/1.1.1_jasmine@3.8.0:
     resolution: {integrity: sha512-GBqtas3l8SBo39NwjbHuzWhQhgHabq/mVVDabGvKLUXRFH8GtPy4jPKRIMDLWC+q7S+q4M6pIY4OHoVuU8hsCQ==}
     peerDependencies:
       jasmine: '>=2 <4'
     dependencies:
-      jasmine: 3.7.0
+      jasmine: 3.8.0
     dev: true
 
-  /jasmine-pass/1.1.0_jasmine@3.7.0:
+  /jasmine-pass/1.1.0_jasmine@3.8.0:
     resolution: {integrity: sha512-gtsHtIj1zNS/90REIpyDH2HRSW7vFwKMau5A2hcfL/RsSwUiKAS8EdOY1Z67m8giyaUMe7I8O7SzJF2oevCX0A==}
     peerDependencies:
       jasmine: <4
     dependencies:
-      jasmine: 3.7.0
+      jasmine: 3.8.0
     dev: true
 
-  /jasmine-should-fail/1.1.7_jasmine@3.7.0:
+  /jasmine-should-fail/1.1.7_jasmine@3.8.0:
     resolution: {integrity: sha512-MNtae0/NUAU0OknPcM4cTA04JEXmxMH0+hqZxBjdt4+8LvDqm+oYIQcY70OqpRwVhTTcAyG7HxiPw/4AGlxfgw==}
     peerDependencies:
       jasmine: '>=2 <4'
     dependencies:
-      jasmine: 3.7.0
+      jasmine: 3.8.0
     dev: true
 
-  /jasmine-unspy/1.1.1_jasmine@3.7.0:
+  /jasmine-unspy/1.1.1_jasmine@3.8.0:
     resolution: {integrity: sha512-hTuMR1ju73BkGG8OCY6ObtimVBqnyThwUuclXW81lOiT/pyBt2W5nZtNAd8N7jzUfjQDd7+m+0DPm5Ecf6T2Pw==}
     peerDependencies:
       jasmine: '>=2 <4'
     dependencies:
-      jasmine: 3.7.0
+      jasmine: 3.8.0
     dev: true
 
-  /jasmine/3.7.0:
-    resolution: {integrity: sha512-wlzGQ+cIFzMEsI+wDqmOwvnjTvolLFwlcpYLCqSPPH0prOQaW3P+IzMhHYn934l1imNvw07oCyX+vGUv3wmtSQ==}
+  /jasmine/3.8.0:
+    resolution: {integrity: sha512-kdQ3SfcNpMbbMdgJPLyFe9IksixdnrgYaCJapP9sS0aLgdWdIZADNXEr+11Zafxm1VDfRSC5ZL4fzXT0bexzXw==}
     hasBin: true
     dependencies:
       glob: 7.1.7
-      jasmine-core: 3.7.1
+      jasmine-core: 3.8.0
     dev: true
 
-  /jasmine2-atom-matchers/1.1.9_jasmine@3.7.0:
+  /jasmine2-atom-matchers/1.1.9_jasmine@3.8.0:
     resolution: {integrity: sha512-YFX2YZx+kmeziPnmZf4YBKkNATA3kBJTdZe4/1QJepeU5zNFty+/PrX/6Nvdfh0Lca30fbc5rn0lF8RZ/spHZQ==}
     peerDependencies:
       jasmine: '>=2 <4'
     dependencies:
-      jasmine: 3.7.0
+      jasmine: 3.8.0
       jquery: 3.6.0
       underscore-plus: 1.7.0
     dev: true
 
-  /jasmine2-focused/1.1.1_jasmine@3.7.0:
+  /jasmine2-focused/1.1.1_jasmine@3.8.0:
     resolution: {integrity: sha512-2NnQD+Lwqu/0RIVentOiDtdsjhP/4jJooG88rQC3A6lKHxnm2d9Q/wGbQBDZlIA7bDUrQpuHZ6d2A/lACLwfhQ==}
     peerDependencies:
       jasmine: '>=2 <4'
     dependencies:
-      jasmine: 3.7.0
+      jasmine: 3.8.0
     dev: true
 
-  /jasmine2-json/1.1.1_jasmine@3.7.0:
+  /jasmine2-json/1.1.1_jasmine@3.8.0:
     resolution: {integrity: sha512-D8dFHVDsDZpqgYK4eR3SYkMXypRjK0MpnHzVkO38ByXe7R3QaZDsoRt3Kh4rqI1U4iq9hkxHuKr+gy+OzuL+8g==}
     peerDependencies:
       jasmine: '>=2 <4'
     dependencies:
-      jasmine: 3.7.0
+      jasmine: 3.8.0
     dev: true
 
-  /jasmine2-tagged/1.1.1_jasmine@3.7.0:
+  /jasmine2-tagged/1.1.1_jasmine@3.8.0:
     resolution: {integrity: sha512-PK/83f9hBI6R/gGZ8zEYHt4OUtZu3xpcoUFICMBVsdbbanrhCCNC3EkWldIQgvuSHaUMhVptXAihWjNJI3uiRw==}
     peerDependencies:
       jasmine: '>=2 <4'
     dependencies:
-      jasmine: 3.7.0
+      jasmine: 3.8.0
     dev: true
 
   /jest-worker/26.6.1:
@@ -3015,7 +3026,7 @@ packages:
       assemblyscript: 0.18.4
     dev: true
 
-  /rollup-plugin-atomic/2.3.2_@types+node@15.12.4:
+  /rollup-plugin-atomic/2.3.2_@types+node@16.3.1:
     resolution: {integrity: sha512-+KRCClmhGHwb/9cFfLCwHUFLe4VYXdhUXNyhoC5T5NTSlPepx9DY4P5vjW0c1yjElDR8Nv4huKnxgF1HIYcbkQ==}
     dependencies:
       '@rollup/plugin-babel': 5.3.0_bf9059d1c3757172c6095e41c3537203
@@ -3033,7 +3044,7 @@ packages:
       rollup-plugin-coffee-script: 2.0.0_coffeescript@1.12.7
       rollup-plugin-css-only: 3.1.0_rollup@2.45.1
       rollup-plugin-execute: 1.1.1
-      rollup-plugin-sourcemaps: 0.6.3_d7b2eeeef5b8b5bfb40f6b2d98ad9b54
+      rollup-plugin-sourcemaps: 0.6.3_@types+node@16.3.1+rollup@2.45.1
       rollup-plugin-terser: 7.0.2_rollup@2.45.1
       rollup-plugin-visualizer: 5.5.0_rollup@2.45.1
       tslib: 2.2.0
@@ -3096,7 +3107,7 @@ packages:
       resolve: 1.20.0
     dev: true
 
-  /rollup-plugin-sourcemaps/0.6.3_d7b2eeeef5b8b5bfb40f6b2d98ad9b54:
+  /rollup-plugin-sourcemaps/0.6.3_@types+node@16.3.1+rollup@2.45.1:
     resolution: {integrity: sha512-paFu+nT1xvuO1tPFYXGe+XnQvg4Hjqv/eIhG8i5EspfYYPBKL57X7iVbfv55aNVASg3dzWvES9dmWsL2KhfByw==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
@@ -3107,7 +3118,7 @@ packages:
         optional: true
     dependencies:
       '@rollup/pluginutils': 3.1.0_rollup@2.45.1
-      '@types/node': 15.12.4
+      '@types/node': 16.3.1
       rollup: 2.45.1
       source-map-resolve: 0.6.0
     dev: true
@@ -3509,6 +3520,12 @@ packages:
 
   /typescript/4.3.4:
     resolution: {integrity: sha512-uauPG7XZn9F/mo+7MrsRjyvbxFpzemRjKEZXS4AK83oP2KKOJPvb+9cO/gmnv8arWZvhnjVOXz7B49m1l0e9Ew==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
+
+  /typescript/4.3.5:
+    resolution: {integrity: sha512-DqQgihaQ9cUrskJo9kIyW/+g0Vxsk8cDtZ52a3NGh0YNTfpUSArXSohyUGnvbPazEPLu398C0UxmKSOrPumUzA==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
