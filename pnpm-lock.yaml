@@ -5,7 +5,7 @@ specifiers:
   '@types/jasmine': ^3.7.7
   '@types/lodash': ^4.14.170
   '@types/node': ^15.12.4
-  atom-ide-base: ^3.1.1
+  atom-ide-base: ^3.2.0
   atom-jasmine3-test-runner: ^5.2.6
   build-commit: latest
   cross-env: latest
@@ -19,13 +19,13 @@ specifiers:
   zadeh: ^3.0.0-beta.4
 
 dependencies:
-  atom-ide-base: 3.1.1
+  atom-ide-base: 3.2.0
   fast-equals: 2.0.3
   lodash: 4.17.21
   zadeh: 3.0.0-beta.4
 
 devDependencies:
-  '@types/atom': 1.40.10
+  '@types/atom': 1.40.11
   '@types/jasmine': 3.7.7
   '@types/lodash': 4.14.170
   '@types/node': 15.12.4
@@ -427,6 +427,13 @@ packages:
     resolution: {integrity: sha512-aNFUhCuR6nmTTMoYKfWWMifZ3IcNETLWC75hCdg3i1/OvirfR/5qm1wfiISBb4s/TPM2YVEtxytCdWhKJuEhzw==}
     dependencies:
       '@types/node': 15.12.4
+    dev: true
+    optional: true
+
+  /@types/atom/1.40.11:
+    resolution: {integrity: sha512-TsPltugw2wKtR5p6ICv73t9kxdx59fTfdcD8Xe/0EEjF5vHBz99Z7Kj/rPRpyM/4ZcY1GrkQh8hgOw/OJRCs0g==}
+    dependencies:
+      '@types/node': 15.12.4
 
   /@types/dompurify/2.2.2:
     resolution: {integrity: sha512-8nNWfAa8/oZjH3OLY5Wsxu9ueo0NwVUotIi353g0P2+N5BuTLJyAVOnF4xBUY0NyFUGJHY05o1pO2bqLto+lmA==}
@@ -758,11 +765,11 @@ packages:
     hasBin: true
     dev: true
 
-  /atom-ide-base/3.1.1:
-    resolution: {integrity: sha512-FRqj3rH+nLscRfC4N2BkyL+lSuRWEi7Z5MSicyNXwS0nx+LQkuRXsglIYIkNG5KcJPu+bkVOUQyUuUsK/Zm/SA==}
+  /atom-ide-base/3.2.0:
+    resolution: {integrity: sha512-i6jmkAvSISl+y686jbJNQBRMq+eDsUvzU5JFIyOjComzc0YNBzOs4p3UTdiogVb7K0PFu7m7746NVEmueTs6Dg==}
     engines: {atom: '>=0.174.0 <2.0.0', pnpm: '>=5.12'}
     dependencies:
-      '@types/atom': 1.40.10
+      '@types/atom': 1.40.11
       '@types/dompurify': 2.2.2
       '@types/node': 15.12.4
       '@types/react': 17.0.11
