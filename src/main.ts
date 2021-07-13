@@ -9,7 +9,9 @@ export { statuses } from "./statuses" // for spec
 import { statuses } from "./statuses"
 import debounce from "lodash/debounce"
 
+export {consumeCallHierarchyProvider, toggleCallHierarchyTab} from "./call-hierarchy/main"
 import * as CallHierarchy from "./call-hierarchy/main"
+// export const {consumeCallHierarchyProvider, toggleCallHierarchyTab} = CallHierarchy
 
 const subscriptions = new CompositeDisposable()
 
@@ -66,8 +68,6 @@ export async function consumeOutlineProvider(provider: OutlineProvider) {
   // the following updates rely on the visibility
   await getOutline()
 }
-
-export const {consumeCallHierarchyProvider, toggleCallHierarchy} = CallHierarchy
 
 // disposables returned inside onEditorChangedDisposable
 let onEditorChangedDisposable: CompositeDisposable | undefined = undefined

@@ -14,10 +14,10 @@ export function activate() {
     (item = new CallHierarchyView({
       providerRegistry: callHierarchyProviderRegistry,
     })),
-    atom.commands.add("atom-workspace", "call-hierarchy:toggle", toggleCallHierarchy)
+    atom.commands.add("atom-workspace", "call-hierarchy:toggle", toggleCallHierarchyTab)
   )
   if (atom.config.get("atom-ide-outline.initialCallHierarchyDisplay")) {
-    toggleCallHierarchy()
+    toggleCallHierarchyTab()
   }
 }
 
@@ -34,7 +34,7 @@ export function consumeCallHierarchyProvider(provider: CallHierarchyProvider): D
 }
 
 /** Show and hide the call-hierarchy tab */
-export function toggleCallHierarchy() {
+export function toggleCallHierarchyTab() {
   let pane = atom.workspace.paneForItem(item)
   if (
     pane &&
