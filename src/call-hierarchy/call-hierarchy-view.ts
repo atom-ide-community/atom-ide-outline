@@ -148,14 +148,14 @@ class CallHierarchyViewItem<T extends CallHierarchyType> extends HTMLElement {
         const itemEl = document.createElement("div")
         itemEl.setAttribute("title", item.path)
         itemEl.innerHTML = `
-      <div class="icon icon-chevron-right">
-        <div>
-          <span>${item.name}</span>
-          <span class="detail">${item.detail ? ` - ${item.detail}` : ""}</span>
-          ${item.tags.map((str) => `<span class="tag-${str}">${str}</span>`).join("")}
+        <div class="icon icon-chevron-right">
+          <div>
+            <span>${escapeHTML(item.name)}</span>
+            <span class="detail">${escapeHTML(item.detail ? ` - ${item.detail}` : "")}</span>
+            ${item.tags.map((str) => `<span class="tag-${escapeHTML(str)}">${escapeHTML(str)}</span>`).join("")}
+          </div>
         </div>
-      </div>
-      `
+        `
         itemEl
           .querySelector(":scope>div>div")
           ?.insertAdjacentElement("afterbegin", getIcon(item.icon ?? undefined, undefined))
@@ -183,7 +183,7 @@ class CallHierarchyViewItem<T extends CallHierarchyType> extends HTMLElement {
   }
   /** Toggle the display of the {i}-th item */
   async toggleItemAt(i: number) {
-    const itemEl = this.querySelectorAll<HTMLLIElement>(`:scope>div`)[i]
+    const itemEl = this.querySelectorAll<HTMLLIElement>(":scope>div")[i]
     const titleEl = itemEl.querySelector<HTMLDivElement>(":scope>div")
     const childEl = itemEl.querySelector<CallHierarchyViewItem<T>>("atom-ide-call-hierarchy-item")
     if (childEl) {
@@ -244,9 +244,20 @@ class CallHierarchyViewStatusItem extends HTMLElement {
   constructor({ title, description }: { title: string; description: string }) {
     super()
     this.innerHTML = `
-      <h1>${title}</h1>
-      <span>${description}</span>
+      <h1>${escapeHTML(title)}</h1>
+      <span>${escapeHTML(description)}</span>
     `
   }
 }
 customElements.define("atom-ide-call-hierarchy-status-item", CallHierarchyViewStatusItem)
+
+function escapeHTML(str: string): string {
+  return str.replace(/[&'`"<>]/g, (match) => ({
+    '&': '&amp;',
+    "'": '&#x27;',
+    '`': '&#x60;',
+    '"': '&quot;',
+    '<': '&lt;',
+    '>': '&gt;',
+  }[match] as string))
+}
