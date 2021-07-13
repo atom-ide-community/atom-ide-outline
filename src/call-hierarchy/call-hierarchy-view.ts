@@ -1,5 +1,6 @@
 import { CompositeDisposable } from "atom"
 import { statuses } from "./statuses"
+import { getIcon } from "../utils"
 import type { Disposable, Point, Range, TextEditor } from "atom"
 import type { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
 import type { CallHierarchy, CallHierarchyProvider, CallHierarchyType } from "atom-ide-base"
@@ -249,38 +250,3 @@ class CallHierarchyViewStatusItem extends HTMLElement {
   }
 }
 customElements.define("atom-ide-call-hierarchy-status-item", CallHierarchyViewStatusItem)
-
-// copy from https://github.com/atom-community/atom-ide-outline/blob/642c9ebbc5de7ca8124f388fe12198b84476d91c/src/outlineView.ts#L470
-
-function getIcon(iconType: string | undefined, kindType: string | undefined) {
-  // LSP specification: https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_documentSymbol
-  // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
-
-  const iconElement = document.createElement("span")
-  iconElement.classList.add("call-hierarchy-icon") // change from 'outline' to 'call-hierarchy'
-
-  // if iconType given instead
-  if (kindType === undefined && iconType !== undefined) {
-    kindType = iconType
-  }
-
-  let type: string = "🞇"
-  if (typeof kindType === "string" && kindType.length > 0) {
-    let kindClass: string
-    // hasKind
-    if (kindType.indexOf("type-") === 0) {
-      // supplied with type-...
-      kindClass = `${kindType}`
-      type = kindType.replace("type-", "")
-    } else {
-      // supplied without type-
-      kindClass = `type-${kindType}`
-      type = kindType
-    }
-    iconElement.classList.add(kindClass)
-  }
-
-  iconElement.innerHTML = `<span>${type.substring(0, 3)}</span>`
-
-  return iconElement
-}
