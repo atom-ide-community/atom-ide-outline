@@ -16,7 +16,7 @@ export function activate() {
     })),
     atom.commands.add("atom-workspace", "call-hierarchy:toggle", toggleCallHierarchy)
   )
-  if (atom.config.get("atom-ide-call-hierarchy.initialDisplay")) {
+  if (atom.config.get("atom-ide-outline.initialCallHierarchyDisplay")) {
     toggleCallHierarchy()
   }
 }
@@ -58,7 +58,7 @@ export function toggleCallHierarchy() {
 }
 
 export const config = {
-  initialDisplay: {
+  initialCallHierarchyDisplay: {
     title: "Initial Call Hierarchy Display",
     description: "Show call hierarchy initially aftern atom loads",
     type: "boolean",

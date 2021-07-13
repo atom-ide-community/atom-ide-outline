@@ -13,6 +13,12 @@ export declare function toggleOutlineView(): Promise<void>;
 export declare function getOutline(editor?: TextEditor | undefined): Promise<void>;
 export declare function setStatus(id: "noEditor" | "noProvider"): void;
 export declare const config: {
+    initialCallHierarchyDisplay: {
+        title: string;
+        description: string;
+        type: string;
+        default: boolean;
+    };
     initialDisplay: {
         title: string;
         description: string;
