@@ -1,0 +1,104 @@
+@import "ui-variables";
+@import "syntax-variables";
+
+@contain_all: size layout paint style;
+@contain_except_size: layout paint style;
+
+.atom-ide-outline,
+atom-ide-call-hierarchy-item {
+  .outline-icon,
+  .call-hierarchy-icon {
+    contain: @contain_except_size;
+    display: inline-block;
+    width: 6ch;
+    font-size: 75%;
+    text-align: center;
+    vertical-align: middle; // align icon with text vertically
+    font-weight: normal;
+  }
+
+  // syntax-variables for languge entites: https://github.com/atom/atom/blob/master/static/variables/syntax-variables.less#L32
+  // atom-languageclient mapping: https://github.com/atom/atom-languageclient/blob/485bb9d706b422456640c9070eee456ef2cf09c0/lib/adapters/outline-view-adapter.ts#L270
+
+  .iconByType(@type) {
+    content: replace(@type, "^(....).*$", '"$1"'); // use the first 4 letter of the type
+  }
+  .iconByType(array) {
+    content: "arr";
+  }
+  .iconByType(constructor) {
+    content: "ctor";
+  }
+  .iconByType(field) {
+    content: "fild";
+  }
+  .iconByType(function) {
+    font-family: "symbol-icons";
+    content: "\e608";
+  }
+  .iconByType(interface) {
+    content: "intf";
+  }
+  .iconByType(module) {
+    content: "mod";
+  }
+  .iconByType(namespace) {
+    font-family: "symbol-icons";
+    content: "\e609";
+  }
+  .iconByType(number) {
+    content: "num";
+  }
+  .iconByType(package) {
+    content: "pkg";
+  }
+  .iconByType(string) {
+    content: "str";
+  }
+  .iconByType(variable) {
+    font-family: "symbol-icons";
+    content: "\e607";
+  }
+
+  .styleByType(@type, @color) {
+    .type-@{type} {
+      color: @color;
+      &::before {
+        .iconByType(@type);
+      }
+      & > span {
+        display: none;
+      }
+    }
+
+    .fold-type-@{type} {
+      contain: @contain_except_size;
+      background-color: darken(@color, 10%);
+
+      &:focus {
+        contain: @contain_except_size;
+        opacity: 1;
+      }
+    }
+  }
+
+  .styleByType("", @syntax-color-value);
+  .styleByType(array, @syntax-color-value);
+  .styleByType(boolean, @syntax-color-value);
+  .styleByType(class, @syntax-color-class);
+  .styleByType(constant, @syntax-color-constant);
+  .styleByType(constructor, @syntax-color-function);
+  .styleByType(enum, @syntax-color-variable);
+  .styleByType(field, @syntax-color-tag);
+  .styleByType(file, @syntax-color-import);
+  .styleByType(function, @syntax-color-function);
+  .styleByType(interface, @syntax-color-class);
+  .styleByType(method, @syntax-color-method);
+  .styleByType(module, @syntax-color-import);
+  .styleByType(namespace, @syntax-color-keyword);
+  .styleByType(number, @syntax-color-value);
+  .styleByType(package, @syntax-color-import);
+  .styleByType(property, @syntax-color-property);
+  .styleByType(string, @syntax-color-value);
+  .styleByType(variable, @syntax-color-variable);
+}
