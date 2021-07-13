@@ -46,7 +46,7 @@
     "prettier-config-atomic": "^2.0.3",
     "rollup-plugin-atomic": "^2.3.0",
     "shx": "latest",
-    "typescript": "^4.2.4"
+    "typescript": "^4.3.5"
   },
   "activationHooks": [
     "core:loaded-shell-environment"
