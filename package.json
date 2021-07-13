@@ -59,6 +59,11 @@
         "0.1.0": "consumeOutlineProvider"
       }
     },
+    "call-hierarchy": {
+      "versions": {
+        "0.0.0": "consumeCallHierarchyProvider"
+      }
+    },
     "busy-signal": {
       "versions": {
         "1.0.0": "consumeSignal"
