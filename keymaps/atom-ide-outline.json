@@ -1,5 +1,6 @@
 {
   "atom-workspace": {
-    "alt-o": "outline:toggle"
+    "alt-o": "outline:toggle",
+    "alt-c": "call-hierarchy:toggle"
   }
 }

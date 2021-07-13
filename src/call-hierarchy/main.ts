@@ -1,12 +1,11 @@
 import { CompositeDisposable } from "atom"
 import type { Disposable } from "atom"
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
+import type { CallHierarchyProvider } from "atom-ide-base"
 
 import { CallHierarchyView } from "./call-hierarchy-view"
-import type { CallHierarchyProvider } from "./call-hierarchy"
 
-// TODO: remove any
-const callHierarchyProviderRegistry = new ProviderRegistry<any>()
+const callHierarchyProviderRegistry = new ProviderRegistry<CallHierarchyProvider>()
 const subscriptions = new CompositeDisposable()
 let item: CallHierarchyView
 

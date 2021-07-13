@@ -1,0 +1,82 @@
+@import "ui-variables";
+
+atom-ide-call-hierarchy-view {
+  background: @base-background-color;
+  > div:first-child {
+    display: flex;
+    line-height: 36px;
+    height: 36px;
+    font-size: 1.4em;
+    cursor: pointer;
+    &:first-child > div {
+      flex-grow: 1;
+      text-align: center;
+      padding: 0;
+      border-bottom: 2px solid @background-color-highlight;
+      overflow: hidden;
+    }
+  }
+  &[current-type="incoming"] > div:first-child > div:first-child,
+  &[current-type="outgoing"] > div:first-child > div:last-child {
+    border-bottom: 2px solid @background-color-info;
+  }
+  &[current-type="incoming"] > div:first-child > div:last-child:hover,
+  &[current-type="outgoing"] > div:first-child > div:first-child:hover {
+    background: @background-color-highlight;
+  }
+  > div:last-child {
+    height: calc(~"100% - 36px");
+    overflow-x: auto;
+    > atom-ide-call-hierarchy-item {
+      font-size: 1.4em;
+    }
+  }
+}
+
+atom-ide-call-hierarchy-item {
+  display: block;
+  line-height: 1.5em;
+  user-select: none;
+  > div > div {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 0;
+    padding-left: 0.7em;
+    &:hover {
+      background: @background-color-highlight;
+    }
+  }
+  atom-ide-call-hierarchy-item {
+    border-left: 1px solid @background-color-highlight;
+    margin-left: 1.2em;
+  }
+  .call-hierarchy-no-data {
+    padding-left: 1.4em;
+    cursor: default;
+    font-size: 80%;
+  }
+  .detail {
+    font-size: 80%;
+  }
+  .tag-deprecated {
+    padding: 0 0.3em;
+    margin: 0 0.2em;
+    border-radius: 5px;
+    background-color: darkred;
+    color: white;
+    font-size: 80%;
+    font-weight: bold;
+  }
+}
+atom-ide-call-hierarchy-status-item {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 0 @component-padding;
+  h1 {
+    font-size: 1.5rem;
+  }
+}

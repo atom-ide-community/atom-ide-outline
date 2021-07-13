@@ -2,16 +2,17 @@ import { CompositeDisposable } from "atom"
 import { statuses } from "./statuses"
 import type { Disposable, Point, Range, TextEditor } from "atom"
 import type { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry"
-import type { CallHierarchy, CallHierarchyProvider, CallHierarchyType } from "./call-hierarchy"
+import type { CallHierarchy, CallHierarchyProvider, CallHierarchyType } from "atom-ide-base"
 
 type statusKey = keyof typeof statuses
+
+// TODO: escape HTML
 
 /** HTMLElement for the call-hierarchy tab */
 export class CallHierarchyView extends HTMLElement {
   #subscriptions = new CompositeDisposable()
   #editorSubscriptions: Disposable | undefined
-  // TODO: remove any
-  #providerRegistry: ProviderRegistry<any>
+  #providerRegistry: ProviderRegistry<CallHierarchyProvider>
   #outputElement: HTMLDivElement
   #currentType!: CallHierarchyType
   #debounceWaitTime = 300
@@ -30,8 +31,7 @@ export class CallHierarchyView extends HTMLElement {
   }
   /** Called when the package is activated */
   constructor(
-    // TODO: remove any
-    { providerRegistry }: { providerRegistry: ProviderRegistry<any> }
+    { providerRegistry }: { providerRegistry: ProviderRegistry<CallHierarchyProvider> }
   ) {
     super()
     this.#providerRegistry = providerRegistry
@@ -54,6 +54,7 @@ export class CallHierarchyView extends HTMLElement {
         this.#editorSubscriptions?.dispose()
         let debounceTimeout: number | undefined
         this.#editorSubscriptions = editor?.onDidChangeCursorPosition((event) => {
+          // TODO: use loadash/debounse
           window.clearTimeout(debounceTimeout)
           debounceTimeout = window.setTimeout(() => {
             this.showCallHierarchy(editor, event.newBufferPosition)
@@ -80,8 +81,7 @@ export class CallHierarchyView extends HTMLElement {
       return
     }
     const targetPoint = point || targetEditor.getCursorBufferPosition()
-    // TODO: remove type annotation
-    const provider: CallHierarchyProvider | null = this.#providerRegistry.getProviderForEditor(targetEditor)
+    const provider = this.#providerRegistry.getProviderForEditor(targetEditor)
     if (!provider) {
       this.#updateCallHierarchyView("noProvider")
       return
