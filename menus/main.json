@@ -1,0 +1,10 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Show Call Hierarchy",
+        "command": "call-hierarchy:show"
+      }
+    ]
+  }
+}

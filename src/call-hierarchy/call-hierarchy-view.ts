@@ -7,8 +7,6 @@ import type { CallHierarchy, CallHierarchyProvider, CallHierarchyType } from "at
 
 type statusKey = keyof typeof statuses
 
-// TODO: escape HTML
-
 /** HTMLElement for the call-hierarchy tab */
 export class CallHierarchyView extends HTMLElement {
   #subscriptions = new CompositeDisposable()

@@ -9,7 +9,7 @@ export { statuses } from "./statuses" // for spec
 import { statuses } from "./statuses"
 import debounce from "lodash/debounce"
 
-export {consumeCallHierarchyProvider, toggleCallHierarchyTab} from "./call-hierarchy/main"
+export { consumeCallHierarchyProvider } from "./call-hierarchy/main"
 import * as CallHierarchy from "./call-hierarchy/main"
 // export const {consumeCallHierarchyProvider, toggleCallHierarchyTab} = CallHierarchy
 

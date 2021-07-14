@@ -2,7 +2,7 @@ import { TextEditor } from "atom";
 import { OutlineProvider } from "atom-ide-base";
 import { ProviderRegistry } from "atom-ide-base/commons-atom/ProviderRegistry";
 export { statuses } from "./statuses";
-export { consumeCallHierarchyProvider, toggleCallHierarchyTab } from "./call-hierarchy/main";
+export { consumeCallHierarchyProvider } from "./call-hierarchy/main";
 export declare const outlineProviderRegistry: ProviderRegistry<OutlineProvider>;
 export declare function activate(): void;
 export declare function deactivate(): void;

@@ -14,7 +14,8 @@ export function activate() {
     (item = new CallHierarchyView({
       providerRegistry: callHierarchyProviderRegistry,
     })),
-    atom.commands.add("atom-workspace", "call-hierarchy:toggle", toggleCallHierarchyTab)
+    atom.commands.add("atom-workspace", "call-hierarchy:toggle", toggleCallHierarchyTab),
+    atom.commands.add("atom-workspace", "call-hierarchy:show", showCallHierarchyTab)
   )
   if (atom.config.get("atom-ide-outline.initialCallHierarchyDisplay")) {
     toggleCallHierarchyTab()
@@ -33,28 +34,44 @@ export function consumeCallHierarchyProvider(provider: CallHierarchyProvider): D
   return providerDisposer
 }
 
-/** Show and hide the call-hierarchy tab */
-export function toggleCallHierarchyTab() {
+/** Show the call-hierarchy tab */
+function showCallHierarchyTab() {
+  showOrHideCallHierarchyTab({shouldHide: false, shouldShow: true})
+}
+
+/** Show or hide the call-hierarchy tab */
+function toggleCallHierarchyTab() {
+  showOrHideCallHierarchyTab({shouldHide: true, shouldShow: true})
+}
+
+/** Show or hide the call-hierarchy tab with using option */
+function showOrHideCallHierarchyTab({shouldHide, shouldShow}: {shouldHide: boolean, shouldShow: boolean}) {
   let pane = atom.workspace.paneForItem(item)
-  if (
-    pane &&
-    pane.getActiveItem() === item &&
-    // @ts-ignore (getVisiblePanes is not includes typedef)
-    atom.workspace.getVisiblePanes().includes(pane)
-  ) {
-    // destroy if item is visible
-    pane.destroyItem(item)
-    return
+  if (shouldHide) {
+    if (
+      pane &&
+      pane.getActiveItem() === item &&
+      // @ts-ignore (getVisiblePanes is not includes typedef)
+      atom.workspace.getVisiblePanes().includes(pane)
+    ) {
+      // destroy if item is visible
+      pane.destroyItem(item)
+      return
+    }
   }
-  const rightDock = atom.workspace.getRightDock()
-  if (!pane) {
-    // add item if it does not exist
-    pane = rightDock.getActivePane()
-    pane.addItem(item)
+  if (shouldShow) {
+    const rightDock = atom.workspace.getRightDock()
+    if (!pane) {
+      // add item if it does not exist
+      pane = rightDock.getActivePane()
+      pane.addItem(item)
+    }
+    item.activate()
+    pane.activateItem(item)
+    // What if it's not rightDock?
+    // TODO: This is not necessary except for rightDock
+    rightDock.show()
   }
-  item.activate()
-  pane.activateItem(item)
-  rightDock.show()
 }
 
 export const config = {
